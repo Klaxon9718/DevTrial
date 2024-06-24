@@ -11,32 +11,36 @@ import { useScreenSizeClass } from './utils/media-query';
 import Content from './Content';
 import UnauthenticatedContent from './UnauthenticatedContent';
 
+import { RecoilRoot } from 'recoil';	// 상태관리 recoil
+
 function App() {
-  const { user, loading } = useAuth();
+	const { user, loading } = useAuth();
 
-  if (loading) {
-    return <LoadPanel visible={true} />;
-  }
+	if (loading) {
+		return <LoadPanel visible={true} />;
+	}
 
-  if (user) {
-    return <Content />;
-  }
+	if (user) {
+		return <Content />;
+	}
 
-  return <UnauthenticatedContent />;
+	return <UnauthenticatedContent />;
 }
 
 export default function Root() {
-  const screenSizeClass = useScreenSizeClass();
+	const screenSizeClass = useScreenSizeClass();
 
-  return (
-    <Router>
-      <AuthProvider>
-        <NavigationProvider>
-          <div className={`app ${screenSizeClass}`}>
-            <App />
-          </div>
-        </NavigationProvider>
-      </AuthProvider>
-    </Router>
-  );
+	return (
+		<RecoilRoot>
+			<Router>
+				<AuthProvider>
+					<NavigationProvider>
+						<div className={`app ${screenSizeClass}`}>
+							<App />
+						</div>
+					</NavigationProvider>
+				</AuthProvider>
+			</Router>
+		</RecoilRoot>
+	);
 }
