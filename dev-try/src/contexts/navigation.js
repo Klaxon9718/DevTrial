@@ -6,7 +6,6 @@ const useNavigation = () => useContext(NavigationContext);
 
 function NavigationProvider(props) {
   const [navigationData, setNavigationData] = useState({ currentPath: '' });
-
   return (
     <NavigationContext.Provider
       value={{ navigationData, setNavigationData }}
@@ -15,6 +14,7 @@ function NavigationProvider(props) {
   );
 }
 
+//네비게이션 변화 감지
 function withNavigationWatcher(Component, path) {
   const WrappedComponent = function (props) {
     const { setNavigationData } = useNavigation();

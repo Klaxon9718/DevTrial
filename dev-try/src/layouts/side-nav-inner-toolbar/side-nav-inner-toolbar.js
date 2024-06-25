@@ -54,6 +54,8 @@ export default function SideNavInnerToolbar({ title, children }) {
       return;
     }
 
+	//console.log("SideNavInnerToolbar 진입");
+	// navigate(); => 경로로 페이지 이동
     navigate(itemData.path);
     scrollViewRef.current.instance().scrollTo(0);
 
