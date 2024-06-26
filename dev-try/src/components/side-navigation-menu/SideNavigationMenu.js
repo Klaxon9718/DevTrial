@@ -40,6 +40,7 @@ export default function SideNavigationMenu(props) {
       events.off(prevElement, 'dxclick');
     }
 
+	//네비게이션 클릭 시 작동
     wrapperRef.current = element;
     events.on(element, 'dxclick', (e) => {
       openMenu(e);
