@@ -23,4 +23,3 @@ export default function Dept() {
       </DataGrid>
     </React.Fragment>
 )};
-

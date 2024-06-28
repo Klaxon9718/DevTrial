@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/buildㄴ
+/build
 
 # misc
 .DS_Store
@@ -25,3 +25,6 @@ yarn-error.log*
 
 #디비 정보
 src/backend/dbinfo.js
+
+#devextreme license key
+src/devextreme-license.js

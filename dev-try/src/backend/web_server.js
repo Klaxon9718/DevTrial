@@ -1,6 +1,8 @@
 const sequelize = require('./dbconn.js');
 const express = require('express');
 const app = express();
+const mysql = require('mysql2');
+
 
 app.get('/', (req, res) => {
   res.send('Hello World! ');
@@ -17,3 +19,4 @@ app.listen(5000, async() => {
 		console.error('Unable to connect to the database:', error);
 	  }
 });
+
