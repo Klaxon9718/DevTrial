@@ -7,7 +7,19 @@ import DataGrid, {
   Lookup
 } from 'devextreme-react/data-grid';
 
+
 export default function Customer() {
+  // const [data, setData] = useState([]);
+  	
+  // useEffect(() => {
+  // const fetchData = async() => {
+  //       const res = await axios.get('https://localhost:3001/hello');
+  //       return res.data;
+  //     }	
+      
+  //     fetchData().then(res => setData(res));
+  // }, []);
+
   return (
     <React.Fragment>
       <h2 className={'content-block'}>Customer</h2>
@@ -23,4 +35,3 @@ export default function Customer() {
       </DataGrid>
     </React.Fragment>
 )};
-

@@ -2,6 +2,8 @@ const sequelize = require('./dbconn.js');
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const mysql = require('mysql2');
+
 
 
 const DEPT = require('./api/dept.js');
@@ -50,3 +52,4 @@ app.post('/dept/selectDeptT', async(req, res) => {console.log(req.body); DEPT.Se
 // }
 
 // select();
+
