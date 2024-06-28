@@ -31,12 +31,12 @@ const queryClient = new QueryClient();
 
 
 //devextreme license
-import { licenseKey } from './devextreme-license';
-import config from 'devextreme/core/config';
+// import { licenseKey } from './devextreme-license';
+// import config from 'devextreme/core/config';
 
-config({
-	licenseKey
-});
+// config({
+// 	licenseKey
+// });
 
 function App() {
 	const { user, loading } = useAuth();
