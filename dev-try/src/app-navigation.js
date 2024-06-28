@@ -34,6 +34,10 @@ export const navigation = [
 			text:'거래처정보',
 			path: '/customer',
 		},
+    {
+			text:'부서정보-yne',
+			path: '/deptYne',
+		},
 	]
   },
 

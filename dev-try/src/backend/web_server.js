@@ -4,11 +4,8 @@ const cors = require('cors');
 const app = express();
 const mysql = require('mysql2');
 
-
-
 const DEPT = require('./api/dept.js');
-
-
+const DEPT_YNE = require('../pages/deptYne/back/deptYne_server.js');
 
 //CORS 처리
 const corsOptions = {
@@ -30,6 +27,13 @@ app.listen(5000, async() => {
 		  console.error('Unable to connect to the database:', error);
 		}
   });
+
+app.get('/', (req, res) => {
+  res.send('Hello World! ');
+});
+
+app.get('/deptYne', async(req, res) => DEPT_YNE.ShowDeptTree(req, res));
+
 
 
 

@@ -1,7 +1,7 @@
 import * as pages from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
-const {HomePage, TasksPage, ProfilePage, DeptPage, CustomerPage} = pages
+const {HomePage, TasksPage, ProfilePage, DeptPage, CustomerPage, DeptYnePage} = pages
 
 const routes = [
     {
@@ -23,6 +23,10 @@ const routes = [
 	{
         path: '/customer',
         element: CustomerPage
+    },
+    {
+        path: '/deptYne',
+        element: DeptYnePage
     },
 ];
 

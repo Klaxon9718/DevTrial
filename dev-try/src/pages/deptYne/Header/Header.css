@@ -1,0 +1,45 @@
+.containerbox{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 100px;
+}
+
+.namelabel{
+    margin-right: 30px;
+}
+
+.searchinput{
+    width: 180px;
+    height: 35px;
+    margin-right: 8px;
+    background: white !important;
+}
+
+.searchinput .dx-placeholder {
+    line-height: 7px !important;
+}
+
+.searchbutton{
+    background: white !important;
+    margin-right: 100px;
+}
+
+.searchbutton :active{
+    background:#FFDDD3 !important;
+    color: white;
+}
+
+.processbutton{
+    background: white !important;
+    margin-right: 10px;
+}
+
+.processbutton :active{
+    background: #FFDDD3 !important;
+}
+
+
