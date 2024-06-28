@@ -11,7 +11,24 @@ import { useScreenSizeClass } from './utils/media-query';
 import Content from './Content';
 import UnauthenticatedContent from './UnauthenticatedContent';
 
+
 import { RecoilRoot } from 'recoil';	// 상태관리 recoil
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";	//react-query 사용
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";  
+
+
+const queryClient = new QueryClient();
+
+// // React Query 기본 옵션 설정
+// const queryClient = new QueryClient({
+// 	defaultOptions: {
+// 	  queries: {
+// 		refetchOnWindowFocus: false, // 윈도우가 다시 포커스되었을때 데이터를 호출할 것인지
+// 		retry: 0, // API 요청 실패시 재시도 하는 옵션 (설정값 만큼 재시도)
+// 	  },
+// 	},
+//   });
+
 
 function App() {
 	const { user, loading } = useAuth();
@@ -31,16 +48,19 @@ export default function Root() {
 	const screenSizeClass = useScreenSizeClass();
 
 	return (
-		<RecoilRoot>
-			<Router>
-				<AuthProvider>
-					<NavigationProvider>
-						<div className={`app ${screenSizeClass}`}>
-							<App />
-						</div>
-					</NavigationProvider>
-				</AuthProvider>
-			</Router>
-		</RecoilRoot>
+		
+			<RecoilRoot>
+				<QueryClientProvider client={queryClient}>
+					<Router>
+						<AuthProvider>
+							<NavigationProvider>
+								<div className={`app ${screenSizeClass}`}>
+									<App />
+								</div>
+							</NavigationProvider>
+						</AuthProvider>
+					</Router>
+				</QueryClientProvider>
+			</RecoilRoot>
 	);
 }
