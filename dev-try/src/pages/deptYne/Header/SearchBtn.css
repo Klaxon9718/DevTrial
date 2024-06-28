@@ -1,0 +1,74 @@
+.rendertitle{
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px;
+}
+
+.dx-popup-content{
+    padding: 0px;
+}
+
+.contentheader{
+    width: 100%;
+    height: 20%;
+    background: whitesmoke;
+    padding: 5px;
+    position: relative;
+}
+
+.contentheader .item1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.contentheader .item1 .searchLabel{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.contentheader .item1 .searchInput{
+    width: 180px;
+    height: 35px;
+    margin-left: 8px;
+    background: white !important;
+}
+
+.contentheader .searchbtn{
+    position: absolute;
+    top: 30px;
+    right: 10px; 
+    background: white;
+}
+
+.contentbody{
+    width: 100%;
+    height: 68%;
+}
+
+.contentbody .datagrid{
+    border: 1px solid rgb(211, 211, 211);
+}
+
+.contentfooter{
+    width: 100%;
+    height: 12%;
+    background: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contentfooter .cnt{
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.contentfooter .corfirmbtn{
+    margin-right: 8px;
+}
+
+

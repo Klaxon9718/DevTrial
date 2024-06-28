@@ -1,0 +1,9 @@
+/* 헤더 컬럼 배경색 */
+.dx-datagrid-headers {
+    background-color: whitesmoke !important;
+}
+
+/* 헤더 컬럼 글자색 */
+.dx-datagrid-text-content {
+    color: black; 
+}
