@@ -1,0 +1,24 @@
+// <div style={{ display: 'flex', alignItems: 'center'}}>
+// 				<h2>부서정보</h2>
+// 				<TextBox defaultValue="John Smith" />
+// 				<TextBox defaultValue="John Smith" />
+// 			</div>
+
+.section{
+	align-items:center;
+	display:flex;
+	width: 100%;
+	height: 60px;
+	background: gray;
+}
+
+.title {
+	margin-left: 80px;
+	margin-right:60px;
+}
+
+.text_box {
+	margin-left: 20px;
+}
+
+// style={{  display: 'flex', alignItems: 'center'}}
