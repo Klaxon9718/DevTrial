@@ -13,6 +13,14 @@ import UnauthenticatedContent from './UnauthenticatedContent';
 
 import { RecoilRoot } from 'recoil';	// 상태관리 recoil
 
+//devextreme license
+import { licenseKey } from './devextreme-license';
+import config from 'devextreme/core/config';
+
+config({
+	licenseKey
+});
+
 function App() {
 	const { user, loading } = useAuth();
 
