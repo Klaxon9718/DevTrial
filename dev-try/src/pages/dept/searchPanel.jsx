@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './searchPanel.scss'
 import axios from 'axios';
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { useQuery } from '@tanstack/react-query'
 import {selectedDeptTable} from '../../recoil/atoms/deptState' 
 
@@ -9,30 +9,28 @@ import {selectedDeptTable} from '../../recoil/atoms/deptState'
 import TextBox, { TextBoxTypes } from 'devextreme-react/text-box';
 
 
-function useDeptQuery (code){
-	//console.log(code);
-	const setDeptTable = useSetRecoilState(selectedDeptTable);
-
-	return;
-}
-
-
 export default function SearchPanel() {
 
-	const [codeInput, setCodeInput] = useState('');
-	const [nameInput, setNameInput] = useState('');
+	const [codeInput, setCodeInput] = useState('');		//부서코드 입력 textbox
+	const [nameInput, setNameInput] = useState('');		//부서명 입력 textbox
   
-	const setDeptTable = useSetRecoilState(selectedDeptTable);
+	const setDeptTable = useSetRecoilState(selectedDeptTable);	//받아온 부서정보 recoil저장
 
 
 	//dept정보 요청
+	// refetch : useQuery를 다시 재실행 할 수 있도록 한다 (https://tanstack.com/query/latest/docs/framework/react/reference/useQuery)
 	const { data , refetch: DataRefetch } = useQuery({
 		queryKey: ['selectDept'],
 		queryFn: async() => { 
-			const response = await axios.post('/dept/selectDeptT', { "dept_code": codeInput, "dept_name":nameInput});
-			console.log("실행", codeInput, nameInput);
+			const response = await axios.post('/dept/selectDeptT', 
+			{ dept_code: codeInput, 
+			  dept_name: nameInput
+			});
+			// console.log("실행", codeInput, nameInput);
+
 			//atom으로 상태 전달
 			setDeptTable(response.data);
+			console.log("SearchPanel useQuery 출력" , response.data);
 			return response.data;
 		 }
 		});
@@ -40,9 +38,7 @@ export default function SearchPanel() {
 
 	//엔티키 이벤트
 	const handleEnterKeyPress = async (e) => {
-
 		await DataRefetch();
-
 	}
 
 	//TextBox 변경 감지

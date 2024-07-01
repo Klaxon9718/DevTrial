@@ -1,72 +1,40 @@
-import React from 'react';
+//파일 import
 import './dept.scss';
+
+//라이브러리
+import React from 'react';
+
+//컴포넌트
 import SearchPanel from './searchPanel';
+import DeptList from './components/deptList';
+import DeptTable from './components/deptTable';
 
-import DataGrid, {	Column,	Pager,	Paging,	FilterRow,	Lookup} from 'devextreme-react/data-grid';
-import TreeView from 'devextreme-react/tree-view';
+//Dev컴포넌트
 import Splitter, { Item } from 'devextreme-react/splitter';
-import { useRecoilState } from 'recoil';
-import {selectedDeptTable} from '../../recoil/atoms/deptState' 
 
-const PaneContentWithTitle = () => {
-	return <div><DataGrid
-		className={'dx-card wide-card'}
-		showBorders={false}
-		focusedRowEnabled={true}
-		defaultFocusedRowIndex={0}
-		columnAutoWidth={true}
-		columnHidingEnabled={true}
-	>
-
-	</DataGrid></div>
-}
 
 
 export default function Dept() {
-
-
-	const [deptT, setDeptT] = useRecoilState(selectedDeptTable);
-
-	console.log("dept에서 출력", deptT);
+		
+		console.log("dept쪽 ", );
 
 	return (
 		<React.Fragment>
-			
 			<SearchPanel/>
+				<Splitter >
+					<Item
+						resizable={true}
+						size="250px"
+						text="panel 1"
+						>
+						<DeptList/>
+					</Item>
 
-			<Splitter >
-				<Item
-					resizable={true}
-					size="250px"
-					text="panel 1">
-						<TreeView
-							id="tree-view"
-							items={deptT}
-							dataStructure="plain"
-							displayExpr="DEPT_NAME"
-							parentIdExpr="PARENT_DEPT"
-							keyExpr="DEPT_CODE"
-							width={250}
-						></TreeView>
-				</Item>
-
-				<Item
-					resizable={true}
-					render={PaneContentWithTitle}>
-
-					<DataGrid
-						className={'dx-card wide-card'}
-						showBorders={false}
-						focusedRowEnabled={true}
-						defaultFocusedRowIndex={0}
-						columnAutoWidth={true}
-						columnHidingEnabled={true}
-					>
-
-					</DataGrid>
-				</Item>
-			</Splitter>
+					<Item
+						resizable={true}>	
+						<DeptTable/>			
+					</Item>
+				</Splitter>
 		</React.Fragment >
 	)
 };
-
