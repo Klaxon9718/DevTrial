@@ -28,7 +28,9 @@ const DeptList = React.memo(() => {
     };
 
     return (
+		<div>
         <TreeView
+			searchEnabled={true}
             id="tree-view"
             items={deptList}
             dataStructure="plain"
@@ -38,6 +40,7 @@ const DeptList = React.memo(() => {
             width={250}
             onItemClick={onClickTreeViewItem}
         />
+		</div>
     );
 });
 

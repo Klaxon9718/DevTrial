@@ -20,7 +20,7 @@ export default function SearchPanel() {
 	//dept정보 요청
 	// refetch : useQuery를 다시 재실행 할 수 있도록 한다 (https://tanstack.com/query/latest/docs/framework/react/reference/useQuery)
 	const { data , refetch: DataRefetch } = useQuery({
-		queryKey: ['selectDept'],
+		queryKey: ['selectDept'], 
 		queryFn: async() => { 
 			const response = await axios.post('/dept/selectDeptT', 
 			{ dept_code: codeInput, 

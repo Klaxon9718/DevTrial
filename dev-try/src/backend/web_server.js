@@ -57,6 +57,9 @@ app.post('/dept/selectDeptT', async(req, res) => { console.log("/dept/selectDept
 //DEPT테이블 데이터 select
 app.post('/dept/selectDeptTableData', async(req, res) => {console.log("/dept/selectDeptTableData 바디", req.body); DEPT.SelectDeptData(req, res);});
 
+//새 부서 추가 시 상위 부서 리스트 select
+app.post('/dept/selectParentDeptList', async(req, res) => {console.log("/dept/selectParentDeptList"); DEPT.selectParentDeptList(req, res);});
+
 
 
 

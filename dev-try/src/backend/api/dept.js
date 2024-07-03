@@ -39,6 +39,7 @@ async function SelectDept(req, res) {
     // }
 }
 
+//DEPT테이블 데이터 select
 async function SelectDeptData(req, res){
 	const bcode = req.body.dept_code
 
@@ -49,7 +50,19 @@ async function SelectDeptData(req, res){
 	res.json(dept)
 }
 
+//새 부서 추가 시 상위 부서 리스트 select
+async function selectParentDeptList (req, res){
+	let dept = await DEPT.findAll({ attributes: [['DEPT_CODE', 'PARENT_CODE'], ['DEPT_NAME', 'PARENT_NAME']]});
+
+	//최상위 부서 추가
+	const topDept = { "PARENT_NAME": '최상위 부서', "PARENT_CODE" : 'TOP_DEPT'}
+	dept.push(topDept);
+
+	res.json(dept);
+}
+
 module.exports = {
 	SelectDept,
 	SelectDeptData,
+	selectParentDeptList,
 }

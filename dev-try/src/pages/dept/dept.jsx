@@ -25,8 +25,7 @@ export default function Dept() {
 					<Item
 						resizable={true}
 						size="250px"
-						text="panel 1"
-						>
+						text="panel 1">
 						<DeptList/>
 					</Item>
 
