@@ -53,7 +53,7 @@ export default function Content() {
       }
 
     },
-    [tabpage, setRoute, setSelectedItem],
+    [],
   );
 
   const renderTitle = useCallback(

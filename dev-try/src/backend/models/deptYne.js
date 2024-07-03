@@ -1,4 +1,4 @@
-const sequelize = require('../../../backend/dbconn.js');
+const sequelize = require('../dbconn.js');
 const { DataTypes } = require('sequelize');
 
 const Dept = sequelize.define('Dept', {

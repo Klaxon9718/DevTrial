@@ -5,7 +5,7 @@ const app = express();
 const mysql = require('mysql2');
 
 const DEPT = require('./api/dept.js');
-const DEPT_YNE = require('../pages/deptYne/back/deptYne_server.js');
+const DEPT_YNE = require('./api/deptYne.js');
 
 //CORS 처리
 const corsOptions = {
@@ -33,7 +33,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/deptYne', async(req, res) => DEPT_YNE.ShowDeptTree(req, res));
-
+app.get('/deptYne/search', async(req, res) => DEPT_YNE.ShowDeptGrid(req, res));
+app.post('/deptYne/save', async(req, res) => DEPT_YNE.SaveDept(req, res));
 
 
 

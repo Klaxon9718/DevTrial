@@ -3,6 +3,7 @@ import './Header.css';
 import InputBox from './InputBox';
 import { Button } from 'devextreme-react/button';
 import SearchBtn from './SearchBtn';
+import SearchButton from './SearchButton';
 
 function Header(props) {
     return (
@@ -11,7 +12,7 @@ function Header(props) {
             <InputBox placeholder="CODE" id="DEPT_CODE" />
             <InputBox placeholder="NAME" id="DEPT_NAME" />
             <SearchBtn />
-            <Button className="processbutton" type="normal" text="조회" />
+            <SearchButton />
             <Button className="processbutton" type="normal" text="추가" />
             <Button className="processbutton" type="normal" text="저장" />
             <Button className="processbutton" type="normal" text="삭제" />

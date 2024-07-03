@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import useCreateColumn from './useCreateColumn';
 
 const columns = [
@@ -43,6 +43,7 @@ const columns = [
 
 function RightBody(props) {
     const dataGrid = useCreateColumn(columns);
+    
     return (
         <div className="contentbox">
             {dataGrid}
