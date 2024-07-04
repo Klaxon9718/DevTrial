@@ -31,7 +31,6 @@ const DeptList = React.memo(() => {
 		<div>
         <TreeView
 			searchEnabled={true}
-            id="tree-view"
             items={deptList}
             dataStructure="plain"
             displayExpr="DEPT_NAME"
@@ -39,7 +38,9 @@ const DeptList = React.memo(() => {
             keyExpr="DEPT_CODE"
             width={250}
             onItemClick={onClickTreeViewItem}
-        />
+        >
+			</TreeView>
+			
 		</div>
     );
 });

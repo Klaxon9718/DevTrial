@@ -18,6 +18,16 @@ module.exports = function(app) {
       changeOrigin: true, // 서버 구성에 따른 호스트 헤더 변경 여부 설정
     })
   );
+
+  //공통 모듈 요청 api
+  app.use(
+    ["/common/"], //proxy가 필요한 path parameter
+    createProxyMiddleware({
+      target: 'http://localhost:5000/', //타겟이 되는 api url
+
+      changeOrigin: true, // 서버 구성에 따른 호스트 헤더 변경 여부 설정
+    })
+  );
 };
 
 

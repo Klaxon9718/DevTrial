@@ -5,6 +5,7 @@ const app = express();
 const mysql = require('mysql2');
 
 const DEPT = require('./api/dept.js');
+const COMMON = require('./api/common.js')
 const DEPT_YNE = require('../pages/deptYne/back/deptYne_server.js');
 
 
@@ -35,9 +36,7 @@ app.listen(5000, async() => {
 
 
 
-app.get('/', (req, res) => {
-  res.send('Hello World! ');
-});
+app.get('/', (req, res) => {  res.send('Hello World! '); });
 
 
 //deptYne
@@ -62,6 +61,8 @@ app.post('/dept/selectParentDeptList', async(req, res) => {console.log("/dept/se
 
 
 
+//공통 모듈
+app.post('/common/getComTreeViewList', async(req, res) => {console.log("/common/getComTreeViewList"); COMMON.getComTreeViewList(req, res);})
 
 
 

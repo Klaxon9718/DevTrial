@@ -16,6 +16,13 @@ import { RecoilRoot } from 'recoil';	// 상태관리 recoil
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";	//react-query 사용
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";  
 
+//devextreme license
+import { licenseKey } from './devextreme-license';
+import config from 'devextreme/core/config';
+
+config({
+	licenseKey
+});
 
 const queryClient = new QueryClient();
 
@@ -30,13 +37,7 @@ const queryClient = new QueryClient();
 //   });
 
 
-//devextreme license
-// import { licenseKey } from './devextreme-license';
-// import config from 'devextreme/core/config';
 
-// config({
-// 	licenseKey
-// });
 
 function App() {
 	const { user, loading } = useAuth();
