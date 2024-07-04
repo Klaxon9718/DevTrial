@@ -17,7 +17,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";	//reac
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";  
 
 
-const queryClient = new QueryClient();
+
 
 // // React Query 기본 옵션 설정
 // const queryClient = new QueryClient({
@@ -38,6 +38,8 @@ config({
 	licenseKey
 });
 
+const queryClient = new QueryClient();
+
 function App() {
 	const { user, loading } = useAuth();
 
@@ -56,7 +58,6 @@ export default function Root() {
 	const screenSizeClass = useScreenSizeClass();
 
 	return (
-		
 			<RecoilRoot>
 				<QueryClientProvider client={queryClient}>
 					<Router>

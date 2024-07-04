@@ -9,11 +9,15 @@ import './side-nav-inner-toolbar.scss';
 import { useScreenSize } from '../../utils/media-query';
 import { Template } from 'devextreme-react/core/template';
 import { useMenuPatch } from '../../utils/patches';
+import { useRecoilState } from 'recoil';
+import { selectedItem1 } from '../../recoil/atoms/deptState.js' 
+import { currentpath_now } from '../../recoil/atoms/deptState.js' 
 
-
-
-
-export default function SideNavInnerToolbar({ title, children }) {
+export default function SideNavInnerToolbar({ title, children, onnewitem }) {
+  //test
+  const [item1, setItem1] = useRecoilState(selectedItem1);
+  const [currentPath_now, setCurrentPath_now] = useRecoilState(currentpath_now);
+  //test끝
   const scrollViewRef = useRef(null);
   const navigate = useNavigate();
   const { isXSmall, isLarge } = useScreenSize();
@@ -50,10 +54,13 @@ export default function SideNavInnerToolbar({ title, children }) {
 
   const onNavigationChanged = useCallback(({ itemData, event, node }) => {
     if (menuStatus === MenuStatus.Closed || !itemData.path || node.selected) {
+      
       event.preventDefault();
       return;
     }
-
+    setItem1(!item1);
+    setCurrentPath_now(JSON.stringify(itemData)); //recoil에서 props값을 직접 복사해서 변수에 넣어줄 때 오류발생함
+                                                  //props를 저장하기 위해선 json형태로 복사해서 변수에 저장
 	//console.log("SideNavInnerToolbar 진입");
 	// navigate(); => 경로로 페이지 이동
     navigate(itemData.path);

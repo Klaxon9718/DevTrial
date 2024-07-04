@@ -27,11 +27,8 @@ export default function Dept() {
 
 	const [deptT, setDeptT] = useRecoilState(selectedDeptTable);
 
-	console.log("dept에서 출력", deptT);
-
 	return (
 		<React.Fragment>
-			
 			<SearchPanel/>
 
 			<Splitter >

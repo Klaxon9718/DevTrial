@@ -7,12 +7,23 @@ import DataGrid, {
   FilterRow,
   Lookup
 } from 'devextreme-react/data-grid';
+//test
+import FileUploader from 'devextreme-react/file-uploader';
+import Button from 'devextreme-react/cjs/button';
+import FileManager from 'devextreme-react/file-manager';
+import RemoteFileSystemProvider from 'devextreme/file_management/remote_provider';
+
+const remoteFileProvider = new RemoteFileSystemProvider({
+    endpointUrl: 'https://js.devexpress.com/Demos/Mvc/api/file-manager-file-system-scripts'
+});
+//test끝
 
 export default function Task() {
+  const fileUploaderLabel = { 'aria-label': 'Select Photo' };
   return (
     <React.Fragment>
       <h2 className={'content-block'}>Tasks</h2>
-
+      
       <DataGrid
         className={'dx-card wide-card'}
         dataSource={dataSource}
@@ -32,6 +43,18 @@ export default function Task() {
           width={190}
           caption={'Subject'}
           hidingPriority={8}
+          cellRender={(cellInfo) => (
+            <FileUploader
+          inputAttr={fileUploaderLabel}
+          selectButtonText="Select photo"
+          labelText=""
+          accept="image/*"
+          uploadMode="useForm"/>
+            // <Bullet showTarget={false} showZeroLevel={false} value={cellInfo.data.percentage * 100} startScaleValue={0} endScaleValue={100}>
+            //   <Tooltip enabled={false} />
+            //   <Size width={200} height={20} />
+            // </Bullet>
+          )}
         />
         <Column
           dataField={'Task_Status'}
@@ -48,6 +71,7 @@ export default function Task() {
             valueExpr={'value'}
             displayExpr={'name'}
           />
+          
         </Column>
         <Column
           dataField={'ResponsibleEmployee.Employee_Full_Name'}
@@ -60,7 +84,12 @@ export default function Task() {
           caption={'Start Date'}
           dataType={'date'}
           hidingPriority={3}
-        />
+        >
+          <FileManager 
+                fileSystemProvider={remoteFileProvider}>
+                {/* ... */}
+      </FileManager>
+          </Column>
         <Column
           dataField={'Task_Due_Date'}
           caption={'Due Date'}
