@@ -5,3 +5,4 @@ export { default as DeptPage } from './dept/dept';
 export { default as DeptYnePage } from './deptYne/deptYne';
 export { default as CustomerPage } from './customer/customer';
 export { default as TestTreeView } from './treeview/testtreeview';
+export { default as ComDataGrid } from './comdataGrid/comDataGrid';

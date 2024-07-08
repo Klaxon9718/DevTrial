@@ -1,7 +1,7 @@
 import * as pages from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
-const {HomePage, TasksPage, ProfilePage, DeptPage, CustomerPage, DeptYnePage, TestTreeView} = pages
+const {HomePage, TasksPage, ProfilePage, DeptPage, CustomerPage, DeptYnePage, TestTreeView, ComDataGrid} = pages
 
 const routes = [
     {
@@ -31,6 +31,10 @@ const routes = [
 	{
         path: '/treeview',
         element: TestTreeView
+    },
+	{
+        path: '/comDataGrid',
+        element: ComDataGrid
     },
 ];
 

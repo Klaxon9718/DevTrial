@@ -42,6 +42,10 @@ export const navigation = [
 			text:'트리뷰 작성',
 			path: '/treeview',
 		},
+		{
+			text:'cell병합',
+			path: '/comDataGrid',
+		},
 	]
   },
 
