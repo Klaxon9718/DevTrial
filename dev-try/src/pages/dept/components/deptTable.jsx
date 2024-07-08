@@ -12,6 +12,9 @@ import { clickDeptItem, getDeptTableData } from '../../../recoil/atoms/deptState
 import DataGrid, {	Column, Editing, Pager,	Paging,	FilterRow,	Lookup, Changes} from 'devextreme-react/data-grid';
 import { useQuery } from '@tanstack/react-query';
 
+//cell merge테스트
+import COMMON from '../../../common/dataGrid'
+
 
 export default function DeptTable() {
 
@@ -19,6 +22,9 @@ export default function DeptTable() {
 
 	const [updateArray, setUpdateArray] = useState([]);		//그리드 변경 내용 저장
 	const [saveFlag, setSaveFlag] = useState(false);		//저장 시점에서 useQuery를 사용하기 위해 상태 감지를 하는 상태
+
+	//////cell merge 테스트
+	const options = [[2],[3]];
 
 	//#region api 요청
 	// 그리드 용 부서 정보 요청
@@ -141,10 +147,11 @@ export default function DeptTable() {
 		dataSource={gridData}
 		keyExpr="DEPT_CODE"
 		onSaving={clickSavebtn}
+		onCellPrepared={(...arge) => COMMON.onCellPreparedCom(...arge, options)}
 		>
 
 			<Editing
-			 mode="batch"
+			 mode='batch'
 			 allowUpdating={true}
 			 allowAdding={true}
 			 allowDeleting={true}

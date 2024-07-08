@@ -7,14 +7,19 @@ const onCellPreparedCom = (cell, options) => {
 		3. col1 + col2 + col4 가 일치하는 "col2"가 있다면 병합합니다.
 		우선순위 : col1[0], col4[3], col2[1]
 	*/
-	
+	console.log("cell을 찍자",cell);
 	//인자로 가져온 행의 타입이 데이터 행인지 검사
 	// https://js.devexpress.com/React/Documentation/ApiReference/UI_Components/dxDataGrid/Row/#rowType
+	
 	if (cell.rowType == 'data') {	
 
 		const mergeByColumnIndex = (columns, option) => {
 			// console.log("mergeByColumnIndex columns : ", columns, " option : ", option);
 			// if (cell.column.allowMerge && option.includes(cell.columnIndex)) {
+				if (cell.row.data.isNewRow === true){
+					console.log("뉴로우");
+				}
+				
 			if (option.includes(cell.columnIndex)) {
 				//cell.columnIndex = 
 				//https://js.devexpress.com/React/Documentation/Guide/UI_Components/DataGrid/Columns/Column_and_Row_Indexes/
