@@ -19,7 +19,7 @@ import { TabPanelOptions } from 'devextreme-react/cjs/form.js';
 const allTabpage = routes;
 export default function Content(props) {
   const navigate = useNavigate();
-  const { navigationData: { currentPath } } = useNavigation();
+  //const { navigationData: { currentPath } } = useNavigation();
   const [route, setRoute] = useState(routes[2]);
   const [tabpage, setTabpage] = useState(allTabpage.slice(0,3));
   const [selectedItem, setSelectedItem] = useState(routes[routes.findIndex((item) => item.path === '/home')]);
@@ -43,38 +43,55 @@ export default function Content(props) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const isMounted = useRef(false);
   const [currentPath_now, setCurrentPath_now] = useRecoilState(currentpath_now);
-  const testEventHandler = useCallback((props) => {
-    console.log('테스트', props);
+  const testEventHandler = useCallback((e) => {
+    console.log("테스트 : ", e);
 }, []);
 
+  const changeTitle = useCallback((id, title) => {
+    const opt = tabRef.current?.instance.option();
+    const index = opt?.items?.findIndex((value) => value.id === id);
+    if (index === -1) {
+      return;
+    }
+    tabRef.current?.instance.option(`items[${index}].title`, title);
+  }, [currentPath_now]);
   //test 끝
 
   const closeButtonHandler = useCallback(
     (item) => {
+      
       const newRoute = [...tabpage];
       const index = newRoute.indexOf(item);
+      console.log('지울 탭 : ', newRoute[index]);
       newRoute.splice(index, 1);
       setTabpage(newRoute);
+      if (newRoute.length === 0) {
+        setCurrentPath_now(JSON.stringify(routes[2]));
+      }
       if (index >= newRoute.length && index > 0) {  //마지막 탭 닫기 버튼 눌렀을 때
+        
         navigate(newRoute[index - 1].path);
         setSelectedItem(newRoute[index - 1]);
+        setCurrentPath_now(JSON.stringify(newRoute[index-1]));
         setSelectedIndex(index-1);
       }
       else if (index >= 0) { //중간 탭 닫기 버튼 눌렀을 때
         if (newRoute.length !== 0) {
           navigate(newRoute[index].path);
           setSelectedItem(newRoute[index]);
+          setCurrentPath_now(JSON.stringify(newRoute[index]));
           setSelectedIndex(index);
         }
       }
-      //240703 todo 탭을 전부 종료했을 때 사이드바 선택해제
+
+      //240708 todo 탭을 전부 종료했을 때 사이드바 선택해제
     },
     [tabpage],
   );
 
-  const renderTitle = useCallback(
+  const renderTitle = useCallback(  //처음 동작시 TITLE을 설정해줄 때 한번 더 랜더링됨
     (data) => (
-      //console.log('data = ', data),
+      ///console.log('data = ', tabpage),
       <React.Fragment>
         <span>
           {data.name}
@@ -98,32 +115,38 @@ export default function Content(props) {
       //setSelectedIndex(tabpage.findIndex((item) => item.path === args.addedItems[0].path));
       setSelectedItem(args.addedItems[0]);   //탭바에서 눌렀을 때 여기서 탭만큼 호출 해결! 여기 주석처리하면됨
       navigate(args.addedItems[0].path);
-
-      // console.log("selected item = ", selectedItem);
-      // console.log(args.addedItems[0]);
+      //changeTitle(args.addedItems[0].path, renderTitle)
+      setCurrentPath_now(JSON.stringify(args.addedItems[0]));
     },
-    [setSelectedItem],
+    [],
   );
   useEffect(() => {
     //tabpage.findIndex((item) => {item.path === currentPath_now});
-    const current = JSON.parse(currentPath_now);
-    const index = routes.findIndex((item) => item.path === current.path);
-    const newItem = routes[index];
-    const tabpageIndex = tabpage.findIndex((item) => item.path === current.path);
-    
-    if (newItem !== undefined){
-      if (tabpageIndex >= 0) { //사이드바 클릭시 활성화된 탭이 이미 있는경우
-        tabRef.current.selectedItem = newItem;
-        //console.log("selecteditem = ", tabRef.current.selectedIndex = tabpageIndex);
-        setSelectedIndex(tabpageIndex);
-        setSelectedItem(newItem)
-      }
-      else {  //활성화된 탭이 없는 경우
-        setTabpage([...tabpage, newItem]);
-        setSelectedIndex(tabpageIndex);
-        setSelectedItem(newItem)
+    if (isMounted.current){
+      const current = JSON.parse(currentPath_now);
+      const index = routes.findIndex((item) => item.path === current.path);
+      const newItem = routes[index];
+      const tabpageIndex = tabpage.findIndex((item) => item.path === current.path);
+      const tab = tabRef.current && tabRef.current.instance();
+      if (newItem !== undefined){
+        if (tabpageIndex >= 0) { //사이드바 클릭시 활성화된 탭이 이미 있는경우
+          //tab.selectedItem(newItem);
+          //console.log("selecteditem = ", tabRef.current.selectedIndex = tabpageIndex);
+          //setSelectedIndex(tabpageIndex);
+          setSelectedItem(newItem);
+          
+        }
+        else {  //활성화된 탭이 없는 경우
+          setTabpage([...tabpage, newItem]);
+          //setSelectedIndex(tabpageIndex);
+          setSelectedItem(newItem);
+        }
       }
     }
+    else {
+      isMounted.current = true;
+    }
+    
     
     
     // if (){
@@ -172,7 +195,7 @@ export default function Content(props) {
       //newRoute.splice(index, 1);
     // }
 
-  }, [currentPath_now]);
+  }, [currentPath_now]); //currentPath_now
 
   
   return (    
@@ -200,21 +223,18 @@ export default function Content(props) {
           height="100%"
           itemTitleRender={renderTitle}
           //items={tabpage}
-          //itemRender={pageTemplate}
           animationEnabled={true}
           swipeEnabled={true}
           dataSource={tabpage}
           tabsPosition={'top'}
-          stylingMode={'primary'}          
+          //stylingMode={'primary'}          
           repaintChangesOnly={true}
+          deferRendering={true}
           onSelectionChanged={onSelectionChanged}
-          selectedIndex={selectedIndex}
-          //selectedItem={selectedItem}
+          selectedItem={selectedItem}
           itemComponent={pageTemplate}
-          //bindingOptions={testEventHandler}
-        >
-          </TabPanel>
-
+        />
+      
       {/* <Routes>
         {routes.map(({ path, element }) => (
           <Route
@@ -228,6 +248,7 @@ export default function Content(props) {
           element={<Navigate to='/home' />}
         />
       </Routes> */}
+      
       <Footer>
         Copyright © 2011-{new Date().getFullYear()} {appInfo.title} Inc.
         <br />

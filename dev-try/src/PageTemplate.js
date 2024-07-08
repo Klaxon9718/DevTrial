@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useState} from 'react';
 import { List } from 'devextreme-react/list';
 
 import Home from './pages/home/home.js';
@@ -25,7 +25,7 @@ function PageTemplate(props) {
   //   [props]
   // );
   // console.log("testmemo : ", testmemo);
-  const [currentPath_now, setCurrentPath_now] = useRecoilState(currentpath_now);
+  
   console.log("pagetemp : ", props);
 
 
@@ -76,4 +76,4 @@ function PageTemplate(props) {
     </React.Fragment>
   );
 }
-export default PageTemplate;
+export default React.memo(PageTemplate);

@@ -8,6 +8,7 @@ import DataGrid, {
   Lookup
 } from 'devextreme-react/data-grid';
 //test
+import Calendar from 'devextreme-react/calendar';
 import FileUploader from 'devextreme-react/file-uploader';
 import Button from 'devextreme-react/cjs/button';
 import FileManager from 'devextreme-react/file-manager';
@@ -49,7 +50,7 @@ export default function Task() {
           selectButtonText="Select photo"
           labelText=""
           accept="image/*"
-          uploadMode="useForm"/>
+          uploadMode="useButtons"/>
             // <Bullet showTarget={false} showZeroLevel={false} value={cellInfo.data.percentage * 100} startScaleValue={0} endScaleValue={100}>
             //   <Tooltip enabled={false} />
             //   <Size width={200} height={20} />
@@ -83,6 +84,7 @@ export default function Task() {
           dataField={'Task_Start_Date'}
           caption={'Start Date'}
           dataType={'date'}
+          defaultSelectedFilterOperation='between'
           hidingPriority={3}
         >
           <FileManager 

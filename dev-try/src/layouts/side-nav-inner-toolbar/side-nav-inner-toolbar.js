@@ -13,7 +13,7 @@ import { useRecoilState } from 'recoil';
 import { selectedItem1 } from '../../recoil/atoms/deptState.js' 
 import { currentpath_now } from '../../recoil/atoms/deptState.js' 
 
-export default function SideNavInnerToolbar({ title, children, onnewitem }) {
+export default function SideNavInnerToolbar({ title, children, onPathChanged }) {
   //test
   const [item1, setItem1] = useRecoilState(selectedItem1);
   const [currentPath_now, setCurrentPath_now] = useRecoilState(currentpath_now);

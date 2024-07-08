@@ -4,7 +4,8 @@ import { navigation } from '../../app-navigation';
 import { useNavigation } from '../../contexts/navigation';
 import { useScreenSize } from '../../utils/media-query';
 import './SideNavigationMenu.scss';
-
+import { useRecoilState } from 'recoil';
+import { currentpath_now } from '../../recoil/atoms/deptState.js' 
 
 import * as events from 'devextreme/events';
 
@@ -31,6 +32,8 @@ export default function SideNavigationMenu(props) {
   );
 
   const { navigationData: { currentPath } } = useNavigation();
+  const [currentPath_now, setCurrentPath_now] = useRecoilState(currentpath_now);
+  const current = JSON.parse(currentPath_now);
 
   const treeViewRef = useRef(null);
   const wrapperRef = useRef();
@@ -52,16 +55,16 @@ export default function SideNavigationMenu(props) {
     if (!treeView) {
       return;
     }
-
-    if (currentPath !== undefined) {
-      treeView.selectItem(currentPath);
-      treeView.expandItem(currentPath);
+    //console.log('treeview ref = ', treeView);
+    if (current !== undefined) {
+      treeView.selectItem(current.path);
+      treeView.expandItem(current.path);
     }
 
     if (compactMode) {
       treeView.collapseAll();
     }
-  }, [currentPath, compactMode]); //
+  }, [currentPath_now, compactMode]); //currentPath_now
   return (
     <div
       className={'dx-swatch-additional side-navigation-menu'}
