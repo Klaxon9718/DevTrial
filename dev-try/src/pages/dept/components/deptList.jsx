@@ -18,7 +18,6 @@ const DeptList = React.memo(() => {
         ...dept,
         expanded: true // 모든 항목을 처음부터 펼쳐지도록 설정
     }));
-    console.log("deptList에서 출력", deptT); // 문제: 2번 이상 호출됨
 
 
     // TreeView 항목 선택 시 선택 값 recoil처리

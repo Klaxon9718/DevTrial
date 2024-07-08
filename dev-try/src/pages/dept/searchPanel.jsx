@@ -22,9 +22,10 @@ export default function SearchPanel() {
 	const { data , refetch: DataRefetch } = useQuery({
 		queryKey: ['selectDept'], 
 		queryFn: async() => { 
-			const response = await axios.post('/dept/selectDeptT', 
-			{ dept_code: codeInput, 
-			  dept_name: nameInput
+			const response = await axios.post('/dept/selectDeptT',
+			{ 
+				dept_code: codeInput, 
+				dept_name: nameInput
 			});
 			// console.log("실행", codeInput, nameInput);
 
@@ -32,8 +33,8 @@ export default function SearchPanel() {
 			setDeptTable(response.data);
 			console.log("SearchPanel useQuery 출력" , response.data);
 			return response.data;
-		 }
-		});
+		}
+	});
 
 
 	//엔티키 이벤트
@@ -59,4 +60,7 @@ export default function SearchPanel() {
 			</div>
 		</React.Fragment >
 	)
+	
 };
+
+

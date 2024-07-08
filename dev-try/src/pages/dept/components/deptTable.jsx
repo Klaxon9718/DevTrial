@@ -1,5 +1,6 @@
 //파일 import
 import './deptTable.scss'
+import SearchPanel from '../searchPanel';
 
 //라이브러리 관련
 import axios from 'axios';
@@ -16,9 +17,8 @@ export default function DeptTable() {
 
 	const clickedDept = useRecoilValue(clickDeptItem);		//부서 리스트에서 선택된 부서 상태
 
-	const [deptDataTable, setDeptTable] = useRecoilState(getDeptTableData)	// 그리드에 출력할 부서정보
 	const [updateArray, setUpdateArray] = useState([]);		//그리드 변경 내용 저장
-
+	const [saveFlag, setSaveFlag] = useState(false);		//저장 시점에서 useQuery를 사용하기 위해 상태 감지를 하는 상태
 
 	//#region api 요청
 	// 그리드 용 부서 정보 요청
@@ -29,9 +29,8 @@ export default function DeptTable() {
 			{
 				dept_code: clickedDept
 			});
-
-			setDeptTable(response.data);
-			console.log("DeptTable useQuery 출력" , response.data);	
+			
+			// console.log("DeptTable useQuery 출력" , response.data);	
 			return response.data;
 		}
 	});
@@ -45,12 +44,18 @@ export default function DeptTable() {
 			return response.data;
 		}
 	})
-	// console.log("밖에서 상위부서 출력", parentDepts);
-	// console.log("밖에서 updateArray 출력", updateArray);
 
 
-	//그리드 변경 내용 저장
-
+	// 데이터 저장을 실행하는 api
+	const {data : savedData, refetch: savingDeptDateGrid } = useQuery({
+		queryKey: ['savingDeptDateGrid'],
+		queryFn : async() => {
+			console.log("비동기에서 출력", updateArray[0]);
+			const response = await axios.post('/dept/savingDeptDateGrid', updateArray[0]);
+			return response.status;
+		},
+		enabled: false,		//최초렌더링 시 실행 안되도록 (https://tanstack.com/query/latest/docs/framework/react/guides/disabling-queries)
+	})
 	//#endregion
 
 
@@ -60,42 +65,68 @@ export default function DeptTable() {
 	//전체 저장 버튼 클릭 시
 	const clickSavebtn = (e) => {
 		console.log("clickSavebtn", e.changes);
+		setUpdateArray([]);  // 변경 내용 담기 전 배열 초기화
+		setUpdateArray((prev) => [...prev, e.changes]); 
 
-		//변경된 내용 map함수를 통해 필요 데이터만 추출
-		e.changes.map((row) => {
-			//신규 행 : 입력 내용, 타입
-			if(row.type === 'insert') {
-				const newData = { ...row.data, TYPE: row.type }
-				setUpdateArray([...updateArray, newData])
-			}
-			//수정 행 : 수정 내용, 행 key값(DEPT_CODE), 타입
-			if(row.type === 'update') {
-				const newData = { ...row.data, DEPT_CODE: row.key, TYPE: row.type }
-				setUpdateArray([...updateArray, newData])
-			}
-			//삭제 행 : 행 key값(DEPT_CODE), 타입
-			if(row.type === 'remove') {
-				const newData = { DEPT_CODE: row.key, TYPE: row.type }
-				setUpdateArray([...updateArray, newData])
-			}
+		// //변경된 내용 map함수를 통해 필요 데이터만 추출 (사용 X)
+		// e.changes.map((row) => {
+		// 	//신규 행 : 입력 내용, 타입
+		// 	if(row.type === 'insert') {
+		// 		const newData = { ...row.data, TYPE: row.type }
+		// 		setUpdateArray((prev) => [...prev, newData]);
+		// 	}
+		// 	//수정 행 : 수정 내용, 행 key값(DEPT_CODE), 타입
+		// 	if(row.type === 'update') {
+		// 		console.log("제발",row, " + ", row.data);
+		// 		const newData = { ...row.data, DEPT_CODE: row.key, TYPE: row.type }
+		// 		console.log(row);
+		// 		setUpdateArray((prev) => [...prev, newData]);
+		// 	}
+		// 	//삭제 행 : 행 key값(DEPT_CODE), 타입
+		// 	if(row.type === 'remove') {
+		// 		const newData = { DEPT_CODE: row.key, TYPE: row.type }
+		// 		setUpdateArray((prev) => [...prev, newData]);
+		// 	}
+		// });
 
-		})
+		setSaveFlag(true);
 	}
 	//#endregion
 
 
 
 	//최초실행과 부서 리스트에서 선택된 부서가 변경되었을 때 재렌더링
-	useEffect (() => { 	console.log(clickDeptItem); DeptTableDataRefetch();	},[clickedDept])
-	// useEffect (() => { 	console.log(" useEffect배열", updateArray);},[updateArray])
+	useEffect (() => { 	
+		console.log(clickDeptItem); 
+		DeptTableDataRefetch();	
+	},[clickedDept]);
+
+	//저장 버튼을 눌러 updateArray 상태가 변경되면 재렌더링
+	useEffect (() => { 	
+		console.log(" useEffect배열", updateArray); 
+		DeptTableDataRefetch(); 
+	},[updateArray]);
+
+	//저장 api 요청을 보낸다.
+	/****[note]******
+	1. DeptTableDataRefetch에서 saveFlag를 변경
+	2. 의존성 배열과 조건에 따라 아래 useEffect가 실행된다.
+	3. 완료 후 saveFlag 상태를 바꿔준다.
+	*****************/
+	useEffect(() => {
+		if(saveFlag){
+			console.log("으엉", updateArray);
+			savingDeptDateGrid();
+			DeptTableDataRefetch();
+			setSaveFlag(false);
+		}
+	},[saveFlag]);
 
 
 	const handleOpen = useCallback((e) => {
 		console.log('Dropdown opened');
 	})
 
-
-	// console.log("설마",deptDataTable )
 
 	
 	return(
@@ -133,10 +164,3 @@ export default function DeptTable() {
 		</DataGrid>
 	)
 }
-
-
-/**
- * 해결 필요 문제
- * 1. Lookup에서 드롭박스가 열리면 api호출하도록
- * 2. 부서목록에서 선택하지 않고 데이터 입력 후 행 저장 시, 오류 발생
- */

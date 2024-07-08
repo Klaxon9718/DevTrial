@@ -59,6 +59,9 @@ app.post('/dept/selectDeptTableData', async(req, res) => {console.log("/dept/sel
 //새 부서 추가 시 상위 부서 리스트 select
 app.post('/dept/selectParentDeptList', async(req, res) => {console.log("/dept/selectParentDeptList"); DEPT.selectParentDeptList(req, res);});
 
+//데이터 저장
+app.post('/dept/savingDeptDateGrid', async(req, res) => {console.log("/dept/savingDeptDateGrid 저장 중"); DEPT.SavingDeptDateGrid(req, res);});
+
 
 
 //공통 모듈

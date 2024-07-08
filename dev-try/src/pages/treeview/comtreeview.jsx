@@ -65,7 +65,6 @@ export default function ComTreeView (props) {
 				}
 			});
 
-
 		//부모에게 선택 값 전달
 		const onClickTreeViewItem = (e) => {
 			//console.log("선택", e.itemData);
@@ -75,41 +74,39 @@ export default function ComTreeView (props) {
 
 	return(
 		<div>
-		<div className="dx-field">
-		<TextBox
-				name={displayValue}
-				placeholder={phCode}
-				width={TextCodeWidth}
-				height={TextCodeHeight}
-				onChange={onChangeInput} onEnterKey={handleEnterKeyPress}
-				> 
-		</TextBox>
+			<div className="dx-field">
+			<TextBox
+					name={displayValue}
+					placeholder={phCode}
+					width={TextCodeWidth}
+					height={TextCodeHeight}
+					onChange={onChangeInput} onEnterKey={handleEnterKeyPress}
+					> 
+			</TextBox>
 
-		<TextBox
-				name={displayText}
-				placeholder={phName}
-				width={TextNameWidth}
-				height={TextNameHeight}
-				style={{ marginLeft: '1%' }}
-				onChange={onChangeInput} onEnterKey={handleEnterKeyPress}
-				> 
-		</TextBox>
-		</div>
+			<TextBox
+					name={displayText}
+					placeholder={phName}
+					width={TextNameWidth}
+					height={TextNameHeight}
+					style={{ marginLeft: '1%' }}
+					onChange={onChangeInput} onEnterKey={handleEnterKeyPress}
+					> 
+			</TextBox>
+			</div>
 		
 		
-		<TreeView 
-			dataStructure="plain"
-			dataSource={TreeData}
-			displayExpr={displayText}
-			parentIdExpr={parentValue}
-			keyExpr={displayValue}
-			width={Treewidth}
-			height={Treeheight}
-			expandedExpr="expanded"
-			onItemClick={onClickTreeViewItem}
-		>
-			
-		</TreeView>
+			<TreeView 
+				dataStructure="plain"
+				dataSource={TreeData}
+				displayExpr={displayText}
+				parentIdExpr={parentValue}
+				keyExpr={displayValue}
+				width={Treewidth}
+				height={Treeheight}
+				expandedExpr="expanded"
+				onItemClick={onClickTreeViewItem}
+			/>			
 		</div>
 	)
 }
@@ -122,4 +119,6 @@ export default function ComTreeView (props) {
 따라서 부모가 함수를 넣어 props로 자식에게 넘겨주면, 자식이 데이터를 파라미터로 넣어 호출하는 방식으로 동작한다.
 
 즉, 부모가 props로 함수를 넣어주면 자식이 그 함수를 이용해 값을 건네주는 방식이다.
+https://technicolour.tistory.com/56
+https://squirmm.tistory.com/entry/React-%EB%8B%A4%EB%A5%B8-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%97%90-%EC%A0%95%EB%B3%B4-%EC%A0%84%EB%8B%AC
  */

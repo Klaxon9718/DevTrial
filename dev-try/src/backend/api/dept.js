@@ -61,8 +61,28 @@ async function selectParentDeptList (req, res){
 	res.json(dept);
 }
 
+
+async function SavingDeptDateGrid (req, res){
+		console.log("JSON 출력", JSON.stringify(req.body));
+		console.log("JSON 출력, 단순 출력", req.body);
+
+	try {
+		await sequelize.query("CALL save_deptTable_LSH(:data)", {
+		  replacements: { data: JSON.stringify(req.body) }
+		});
+		// console.log("응답 출력" ,res);
+		// 성공
+		res.status(200).json({ message: 'Data saved successfully' });
+	  } catch (error) {
+		// 실패
+		res.status(500).json({ error: error.message });
+	  }
+	
+}
+
 module.exports = {
 	SelectDept,
 	SelectDeptData,
 	selectParentDeptList,
+	SavingDeptDateGrid,
 }

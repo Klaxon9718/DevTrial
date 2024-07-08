@@ -1,9 +1,5 @@
-//Dev 컴포넌트
-import TreeView from 'devextreme-react/tree-view';
-
 //파일 import
 import ComTreeView from './comtreeview';
-import { useState } from 'react';
 
 
 //#region 테스트용 객체 childSetting, childSetting1
@@ -41,7 +37,6 @@ const childSetting1 = {
 
 }
 //#endregion
-
 
 
 export default function TestTreeView() {
