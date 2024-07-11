@@ -7,3 +7,48 @@
 .dx-datagrid-text-content {
     color: black; 
 }
+
+/* 아이콘 크기 조정 */
+
+/* 행 추가 버튼 */
+.dx-datagrid-addrow-button .dx-icon {
+    font-size: 30px !important;
+}
+
+/* 저장 버튼 */
+.dx-datagrid-save-button .dx-icon {
+    font-size: 30px !important;
+}
+
+/* 되돌리기 버튼 */
+.dx-datagrid-undelete-button, .dx-datagrid-cancel-button .dx-icon{
+    font-size: 30px !important;
+}
+
+/* 삭제 버튼 */
+.dx-datagrid-rowsview .dx-row .dx-icon-trash{
+    font-size: 25px !important;
+}
+
+/* 열 선택기 */
+.dx-datagrid-column-chooser-button .dx-icon{
+    font-size: 25px !important;
+}
+
+/* 행 높이 줄이기 */
+.dx-datagrid-rowsview .dx-row td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* 헤더 컬럼 행 높이 줄이기 */
+.dx-datagrid-headers .dx-header-row td {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+/* 셀 편집기 높이 줄이기 (filterRow 제외) */
+.dx-datagrid-rowsview .dx-row:not(.dx-header-row) .dx-texteditor input {
+    height: 100% !important;
+}
+

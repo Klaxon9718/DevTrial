@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import DataGrid, { Column, Editing, SearchPanel, HeaderFilter, Selection,} from 'devextreme-react/data-grid';
+import DataGrid, { Column, Editing, SearchPanel, HeaderFilter, Selection,  FilterRow, FilterPanel,ColumnChooser, Position} from 'devextreme-react/data-grid';
 import './useCreateColumn.css';
 import themes from 'devextreme/ui/themes';
 import { useRecoilState } from 'recoil';
@@ -63,7 +63,7 @@ function useCreateColumn(props) {
     const columns = props;
     return (
         <DataGrid
-            showBorders={false}
+            showBorders={true}
             focusedRowEnabled={true}
             columnAutoWidth={false}
             columnHidingEnabled={true}
@@ -74,13 +74,27 @@ function useCreateColumn(props) {
             allowColumnResizing={true}
             onSaving={onSaving}
         >
+                <FilterRow visible={true} />
+               
+                <ColumnChooser
+                    height="340px"
+                    enabled={true}
+                    mode={'select'}
+                >
+                    <Position
+                        my="center"
+                        at="center"
+                        of="#employees .dx-datagrid-column-chooser-button"
+                    />
+                </ColumnChooser>
+
              <Selection
                 mode="multiple"
                 selectAllMode={allMode}
                 showCheckBoxesMode={checkBoxesMode}
             />
             <Editing
-                mode="form"
+                mode="batch"
                 allowUpdating={true}
                 allowAdding={true}
                 allowDeleting={true}

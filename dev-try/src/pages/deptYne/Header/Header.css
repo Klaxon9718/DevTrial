@@ -12,14 +12,14 @@
     margin-right: 30px;
 }
 
-.searchinput{
+.searchinputHeader{
     width: 180px;
     height: 35px;
     margin-right: 8px;
     background: white !important;
 }
 
-.searchinput .dx-placeholder {
+.searchinputHeader .dx-placeholder {
     line-height: 7px !important;
 }
 

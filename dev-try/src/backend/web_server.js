@@ -32,10 +32,12 @@ app.get('/', (req, res) => {
   res.send('Hello World! ');
 });
 
+app.use(express.json()); // JSON 요청 본문을 파싱합니다.
+
 app.get('/deptYne', async(req, res) => DEPT_YNE.ShowDeptTree(req, res));
 app.get('/deptYne/search', async(req, res) => DEPT_YNE.ShowDeptGrid(req, res));
 app.post('/deptYne/save', async(req, res) => DEPT_YNE.SaveDept(req, res));
-
+app.post('/deptYne/getPopup', async(req, res) => DEPT_YNE.PopupDataList(req, res));
 
 
 

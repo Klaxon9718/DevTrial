@@ -1,5 +1,6 @@
 const { Op } = require('sequelize');
 const Dept = require('../models/deptYne.js');
+const sequelize = require('../dbconn.js');
 
 // keyword 검색 데이터 가져오기
 const getFilteredDepts = async (column, keyword) => {
@@ -86,7 +87,10 @@ async function ShowDeptTree(req, res){
     }
     ];
 
-    if(param == "popup") res.json(deptsJson);
+    if(param == "popup") {
+      res.json(deptsJson);
+    }
+    
     else res.json(root);
   
   } 
@@ -141,8 +145,28 @@ async function SaveDept(req, res){
   }
 }
 
+
+// 팝업 출력
+async function PopupDataList(req, res){
+  const { tableName, codeColumn, nameColumn } = req.body;
+
+  try{
+      const result = await sequelize.query('CALL getPopupList(:TableName, :Column1, :Column2)',{
+          replacements: { TableName: tableName, Column1: codeColumn, Column2: nameColumn},
+      });
+
+      res.json(result);
+  }
+  catch(error){
+      console.error('Error calling stored procedure:', error);
+      res.status(500).send('Error calling stored procedure');
+  }
+
+}
+
 module.exports = {
   ShowDeptTree,
   ShowDeptGrid,
   SaveDept,
+  PopupDataList,
 }

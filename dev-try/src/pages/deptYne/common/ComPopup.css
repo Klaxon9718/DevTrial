@@ -1,5 +1,5 @@
 .rendertitle{
-    height: 20px;
+    height: 15px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -10,34 +10,29 @@
     padding: 0px;
 }
 
-.contentheader{
+.searchField{
     width: 100%;
-    height: 20%;
+    height: 21%;
     background: whitesmoke;
     padding: 5px;
     position: relative;
 }
 
-.contentheader .item1{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 5px;
+.searchField .searchFieldItem{
+    margin-top: 4px;
+    padding-left: 10px;
+    width: 280px;
+    height: 40px;
 }
 
-.contentheader .item1 .searchLabel{
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.contentheader .item1 .searchInput{
-    width: 180px;
-    height: 35px;
-    margin-left: 8px;
+.searchField .searchFieldItem .dx-texteditor-input {
+    width: 100% !important;
+    height: 40px !important;
     background: white !important;
+    border-radius: 5px;
 }
 
-.contentheader .searchbtn{
+.searchField .searchbtn{
     position: absolute;
     top: 30px;
     right: 10px; 
@@ -46,7 +41,7 @@
 
 .contentbody{
     width: 100%;
-    height: 68%;
+    height: 70%;
 }
 
 .contentbody .datagrid{
@@ -55,7 +50,7 @@
 
 .contentfooter{
     width: 100%;
-    height: 12%;
+    height: 9%;
     background: whitesmoke;
     display: flex;
     align-items: center;
@@ -69,6 +64,10 @@
 
 .contentfooter .corfirmbtn{
     margin-right: 8px;
+    height: 33px;
 }
 
-
+.contentbody .dx-datagrid-rowsview .dx-row td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
